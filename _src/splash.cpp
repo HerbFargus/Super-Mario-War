@@ -455,20 +455,17 @@ bool LoadAndSplashScreen()
 	LoadStartGraphics();
 
 	gfxSprite menu_dpi_logo;
-	gfx_loadimagenocolorkey(&menu_dpi_logo, convertPath("gfx/packs/menu/splash_72dpi.png", menugraphicspacklist.current_name()));
-
-	gfxSprite menu_contest_winners;
-	gfx_loadimagenocolorkey(&menu_contest_winners, convertPath("gfx/packs/menu/splash_contest_winners.png", menugraphicspacklist.current_name()));
+	gfx_loadimagenocolorkey(&menu_dpi_logo, convertPath("gfx/packs/menu/splash_inmemory.png", menugraphicspacklist.current_name()));
 
 	gfxSprite menu_credits;
 	gfx_loadimage(&menu_credits, convertPath("gfx/packs/menu/splash_credits.png", menugraphicspacklist.current_name()), false);
 
 	int alpha = 0;
 	int state = 0;
-	int timer = 120;
+	int timer = 60;
 
 	const char * contributors[] = {
-	"no_shorty", "redfalcon", "no_human", "dschingis", "funvill",
+	"Florian Hufsky", "Herb Fargus", "Ronoh55", "no_shorty", "redfalcon", "no_human", "dschingis", "funvill",
 	"matsche", "aeroflare", "Tymoe", "David Olofson", "scoti",
 	"affeOHNEwaffe", "mademan", "mario piuk", "yvoo", "DNightmare", 
 	"Armen", "vvill", "zio tiok", "Donny Viszneki","alex-rus07", "JacobTheHero",
@@ -487,7 +484,7 @@ bool LoadAndSplashScreen()
 	"Pikawil", "Marioman64", "Peardian", "Bob Ippolito", "Viper Snake", "neavea",
 	"Mr.Bob-omb", "milua", "bobmanperson", "DrTek", "somestrangeflea", "nes6502",
 	"XPort", "Naphistim", "Chaos", "NiGHTS", "Kutter", "Maximilian",
-	"Felix the Ghost", "Water Kirby"};
+	"Felix the Ghost", "Water Kirby", "Samuele Poletto", "Two52", "Steven Graff", "Jared"};
 
 #define NUM_CONTRIBUTORS ((int)(sizeof(contributors)/sizeof(char*)))
 
@@ -575,9 +572,9 @@ bool LoadAndSplashScreen()
 				game_values.playerInput.outputControls[iPlayer].menu_cancel.fPressed ||
 				game_values.playerInput.outputControls[iPlayer].menu_random.fPressed)
 			{
-				if(state <= 6)
+				if(state <= 3)
 				{
-					state = 6;
+					state = 3;
 					alpha = 255;
 				}
 				else
@@ -597,7 +594,7 @@ bool LoadAndSplashScreen()
 			}
 		}
 
-		if(state == 0 || state == 3)
+		if(state == 0)
 		{
 			alpha += 4;
 			if(alpha >= 255)
@@ -606,15 +603,15 @@ bool LoadAndSplashScreen()
 				state++;
 			}
 		}
-		else if(state == 1 || state == 4)
+		else if(state == 1)
 		{
 			if(--timer <= 0)
 			{
-				timer = 120;
+				timer = 60;
 				state++;
 			}
 		}
-		else if(state == 2 || state == 5)
+		else if(state == 2)
 		{
 			alpha -= 4;
 			if(alpha <= 0)
@@ -623,7 +620,7 @@ bool LoadAndSplashScreen()
 				state++;
 			}
 		}
-		else if(state == 6)
+		else if(state == 3)
 		{
 			alpha += 5;
 			if(alpha >= 255)
@@ -642,11 +639,6 @@ bool LoadAndSplashScreen()
 		}
 		else if(state == 3 || state == 4 || state == 5)
 		{
-			menu_contest_winners.setalpha((Uint8)alpha);
-			menu_contest_winners.draw(0, 0);
-		}
-		else if(state == 6 || state == 7 || state == 8)
-		{
 			menu_backdrop.setalpha((Uint8)alpha);
 			menu_backdrop.draw(0, 0);
 
@@ -663,14 +655,13 @@ bool LoadAndSplashScreen()
 			menu_credits.draw(227, 200);
 		}
 
-		if(state == 7)
+		if(state == 4)
 		{
-			_load_drawmsg("Loading...");
-			menu_font_large.drawCentered(320, 420, "Loading...");
+			menu_font_large.drawCentered(320, 295, "Loading...");
 		}
-		else if(state == 8)
+		else if(state == 5)
 		{
-			_load_drawmsg("Press Any Key To Continue");
+			menu_font_large.drawCentered(320, 295, "Press Any Key To Continue");
 
 			eyecandy[2].cleandeadobjects();
 			eyecandy[2].update();
@@ -690,7 +681,7 @@ bool LoadAndSplashScreen()
 
 		SDL_Flip(screen);
 
-		if(state == 7)
+		if(state == 4)
 		{
 			backgroundmusic[2].load(musiclist.GetMusic(1));
 
@@ -780,4 +771,3 @@ bool LoadFullSkin(gfxSprite ** sprites, short skinID, short colorID)
 {
 	return LoadFullSkin(sprites, skinlist.GetIndex(skinID), colorID);
 }
-
