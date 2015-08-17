@@ -337,20 +337,25 @@ void CPlayerAI::Think(COutputControl * playerKeys)
 
 	//Expire attention objects
 	std::map<int, AttentionObject*>::iterator itr = attentionObjects.begin(), lim = attentionObjects.end();
+	std::vector<int> toDelete;
 	while(itr != lim)
 	{
 		if(itr->second->iTimer > 0)
 		{
 			if(--(itr->second->iTimer) == 0)
 			{
-				delete itr->second;
-			
-				attentionObjects.erase(itr++);
-				lim = attentionObjects.end();
+				toDelete.push_back(itr->first);
 			}
 		}
 
 		++itr;
+	}
+
+	for (std::vector<int>::iterator tdIt = toDelete.begin(); tdIt != toDelete.end(); ++tdIt) {
+		// perform the actual disposal and removal
+		std::map<int, AttentionObject*>::iterator deadObjIt = attentionObjects.find(*tdIt);
+		delete deadObjIt->second;
+		attentionObjects.erase(deadObjIt);
 	}
 
 	short iStoredPowerup = game_values.gamepowerups[pPlayer->globalID];
