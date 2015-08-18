@@ -49,7 +49,7 @@ fi
 # Linux configuration
 if [ "`uname`" = Linux ]
 then
-echo 'CFLAGS:=$(CFLAGS) -DLINUXFUNC -DPREFIXPATH=\"/usr/share/games/smw\" '`sdl-config --cflags` $CFLAGS >> configuration
+echo 'CFLAGS:=$(CFLAGS) -DLINUXFUNC -DPREFIXPATH=\"/opt/retropie/ports/smw\" '`sdl-config --cflags` $CFLAGS >> configuration
 echo 'LDFLAGS:=$(LDFLAGS) '`sdl-config --libs` $LDFLAGS -lSDL_image -lSDL_mixer -lpng >> configuration
 echo 'COMMON_OBJS:=$(COMMON_OBJS) build/linfunc.o' >> configuration
 fi
@@ -57,7 +57,7 @@ fi
 # SkyOS configuration
 if [ "`uname`" = skyos ]
 then
-echo 'CFLAGS:=$(CFLAGS) -DPREFIXPATH=\"/usr/share/games/smw\" '`sdl-config --cflags` $CFLAGS >> configuration
+echo 'CFLAGS:=$(CFLAGS) -DPREFIXPATH=\"/opt/retropie/ports/smw\" '`sdl-config --cflags` $CFLAGS >> configuration
 echo 'LDFLAGS:=$(LDFLAGS) '`sdl-config --libs` $LDFLAGS -lSDL_image -lSDL_mixer -lpng >> configuration
 echo 'COMMON_OBJS:=$(COMMON_OBJS) build/linfunc.o' >> configuration
 fi
