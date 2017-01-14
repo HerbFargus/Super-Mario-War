@@ -465,7 +465,7 @@ bool LoadAndSplashScreen()
 	int timer = 60;
 
 	const char * contributors[] = {
-	"Florian Hufsky", "Herb Fargus", "Ronoh55", "no_shorty", "redfalcon", "no_human", "dschingis", "funvill",
+	"Florian Hufsky", "fluffypillow", "Herb Fargus", "Ronoh55", "no_shorty", "redfalcon", "no_human", "dschingis", "funvill",
 	"matsche", "aeroflare", "Tymoe", "David Olofson", "scoti",
 	"affeOHNEwaffe", "mademan", "mario piuk", "yvoo", "DNightmare", 
 	"Armen", "vvill", "zio tiok", "Donny Viszneki","alex-rus07", "JacobTheHero",
